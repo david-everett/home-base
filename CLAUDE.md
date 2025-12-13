@@ -61,9 +61,9 @@ Reference implementation demonstrating the pattern.
 
 ### Components
 
-- **Skill:** `.claude/skills/restaurant-availability/SKILL.md`
-- **Script:** `check_restaurants.py` (invokes Resy API)
-- **Data:** `restaurants/*.md` (markdown files with venue IDs)
+- **Skills:** `.claude/skills/restaurant-availability/` and `.claude/skills/add-restaurant/`
+- **Scripts:** `restaurants/scripts/` (check_availability.py, add_restaurant.py, resy_client.py)
+- **Data:** `restaurants/data/*.csv` (CSV files with venue IDs)
 - **Credentials:** `.env` (RESY_API_KEY, RESY_AUTH_TOKEN)
 
 ### Usage
@@ -72,16 +72,16 @@ Ask naturally: "Check dinner availability next Tuesday in places to try"
 
 The skill parses the query and runs:
 ```bash
-python3 check_restaurants.py --date "next tuesday" --list try --category dinner
+python3 restaurants/scripts/check_availability.py --date "next tuesday" --list try --category dinner
 ```
 
 ### Data Structure
 
 Restaurant lists organized by:
 - **List type:** `places_we_love` vs `places_to_try`
-- **Category:** dinner, brunch, lunch, drinks, dessert
+- **Category:** dinner, brunch, lunch, drinks
 
-Each restaurant in markdown includes venue ID for API lookups.
+Each restaurant CSV includes venue ID for API lookups.
 
 ## Creating New Automations
 
@@ -145,16 +145,21 @@ Add to `.claude/settings.local.json`:
 ## Directory Structure
 
 ```
-Home Base/
+home-base/
 ├── .claude/
 │   ├── skills/
 │   │   └── [skill-name]/
 │   │       └── SKILL.md
 │   ├── settings.json
 │   └── settings.local.json
-├── [domain]/                    # Data files per domain
-│   └── *.md or *.json
-├── [script].py                  # Automation scripts
+├── [domain]/                    # Domain folder (e.g., restaurants/)
+│   ├── data/                    # Data files (CSV, JSON)
+│   │   └── *.csv
+│   └── scripts/                 # Automation scripts
+│       └── *.py
+├── tests/                       # Test files
+│   └── [domain]/
+│       └── test_*.py
 ├── .env                         # Credentials (not committed)
-└── claude.md                    # This file
+└── CLAUDE.md                    # This file
 ```

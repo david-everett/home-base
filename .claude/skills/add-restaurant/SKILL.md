@@ -28,7 +28,7 @@ Extract from the user's message:
 
 Run the search command:
 ```bash
-python3 "/Users/davideverett/Home Base/add_restaurant.py" search "restaurant name"
+python3 restaurants/scripts/add_restaurant.py search "restaurant name"
 ```
 
 This returns JSON with matching venues:
@@ -78,7 +78,7 @@ Add Yellow Rose (Tex-Mex, East Village) to places_to_try_dinner.csv?
 
 On confirmation, run:
 ```bash
-python3 "/Users/davideverett/Home Base/add_restaurant.py" add \
+python3 restaurants/scripts/add_restaurant.py add \
   --venue-id 53048 \
   --name "Yellow Rose" \
   --location "East Village" \

@@ -105,7 +105,9 @@ def add_restaurant(venue_id: int, name: str, location: str, cuisine: str,
                    restaurants_dir: str = None) -> bool:
     """Add a restaurant to the appropriate CSV file"""
     if restaurants_dir is None:
-        restaurants_dir = '/Users/davideverett/Home Base/restaurants'
+        # Default to data/ directory relative to this script
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        restaurants_dir = os.path.join(script_dir, '..', 'data')
 
     # Build filename
     list_prefix = 'places_to_try' if list_type == 'try' else 'places_we_love'
@@ -158,8 +160,10 @@ def main():
                            choices=['dinner', 'brunch', 'lunch', 'drinks'],
                            required=True)
     add_parser.add_argument('--notes', default='')
-    add_parser.add_argument('--restaurants-dir',
-                           default='/Users/davideverett/Home Base/restaurants')
+    # Default to data/ directory relative to this script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    default_data_dir = os.path.join(script_dir, '..', 'data')
+    add_parser.add_argument('--restaurants-dir', default=default_data_dir)
 
     args = parser.parse_args()
 
