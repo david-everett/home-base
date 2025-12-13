@@ -1,11 +1,11 @@
 ---
 name: add-restaurant
-description: Add restaurants to your lists by searching Resy and confirming before adding
+description: Add restaurants to your lists by searching Resy and confirming before adding (project)
 ---
 
 # Add Restaurant Skill
 
-Add restaurants to your curated lists by searching the Resy API. This skill handles the full conversational flow: search, disambiguate, confirm, and add.
+Add restaurants to your curated lists by searching the Resy API. Uses a streamlined checkbox UI to gather list/category in one step.
 
 ## Usage Examples
 
@@ -48,33 +48,53 @@ This returns JSON with matching venues:
 
 **If no results:** Tell the user no matches were found on Resy.
 
-**If one result:** Skip to confirmation (Step 4).
-
-**If multiple results:** Present numbered options and ask user to pick:
+**If multiple results:** Use AskUserQuestion with options for each match:
 ```
-Found 2 matches:
-1. Yellow Rose - Tex-Mex, East Village (4.7 stars)
-2. Centro Balneare Yellow Boat - Italian, Italy
-
-Which one?
-```
-
-### Step 4: Gather Missing Info
-
-If list type wasn't specified, ask:
-- "Which list: places to try or places we love?"
-
-If category wasn't specified, ask:
-- "What category: dinner, brunch, lunch, or drinks?"
-
-### Step 5: Confirm Before Adding
-
-Always confirm before adding:
-```
-Add Yellow Rose (Tex-Mex, East Village) to places_to_try_dinner.csv?
+questions: [{
+  question: "Which restaurant?",
+  header: "Restaurant",
+  options: [
+    { label: "Yellow Rose", description: "Tex-Mex, East Village (4.7★)" },
+    { label: "Yellow Boat", description: "Italian, Italy (4.2★)" }
+  ],
+  multiSelect: false
+}]
 ```
 
-### Step 6: Add to List
+**If one result (or after selection):** Proceed to Step 4.
+
+### Step 4: Gather Missing Info & Confirm (Single UI)
+
+Use AskUserQuestion to gather all missing info in ONE call. Include only questions for missing fields:
+
+```
+questions: [
+  {
+    question: "Which list for [Restaurant Name]?",
+    header: "List",
+    options: [
+      { label: "Places to try", description: "Restaurants you want to check out" },
+      { label: "Places we love", description: "Your favorites" }
+    ],
+    multiSelect: false
+  },
+  {
+    question: "What category?",
+    header: "Category",
+    options: [
+      { label: "Dinner", description: "Evening meals" },
+      { label: "Brunch", description: "Weekend brunch spots" },
+      { label: "Lunch", description: "Midday meals" },
+      { label: "Drinks", description: "Bars and cocktails" }
+    ],
+    multiSelect: false
+  }
+]
+```
+
+If list and category were already specified in the original request, skip directly to adding.
+
+### Step 5: Add to List
 
 On confirmation, run:
 ```bash
