@@ -10,7 +10,7 @@ import os
 import re
 import sys
 from datetime import datetime
-from restaurant_availability import (
+from resy_client import (
     ResyChecker,
     parse_date_query,
     load_resy_credentials
@@ -100,10 +100,14 @@ Examples:
         help='Filter out times after this (HH:MM format, default: 20:30)'
     )
 
+    # Default to data/ directory relative to this script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    default_data_dir = os.path.join(script_dir, '..', 'data')
+
     parser.add_argument(
         '--restaurants-dir',
-        default='/Users/davideverett/Home Base/restaurants',
-        help='Directory containing restaurant markdown files'
+        default=default_data_dir,
+        help='Directory containing restaurant CSV files'
     )
 
     parser.add_argument(

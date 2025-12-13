@@ -30,7 +30,7 @@ When invoked:
 
 3. **Construct and execute command:**
    ```bash
-   python3 /Users/davideverett/Home\ Base/check_restaurants.py \
+   python3 restaurants/scripts/check_availability.py \
        --date "next tuesday" \
        --list try \
        --category dinner \
@@ -74,7 +74,7 @@ When invoked:
 
 ## Required Files
 
-- `check_restaurants.py` - Unified CLI script with full parameterization
-- `restaurant_availability.py` - Core ResyChecker class and date parsing
+- `restaurants/scripts/check_availability.py` - Unified CLI script with full parameterization
+- `restaurants/scripts/resy_client.py` - Core ResyChecker class and date parsing
 - `.env` - API credentials (RESY_API_KEY, RESY_AUTH_TOKEN)
-- `restaurants/*.md` - Markdown files with restaurant data and venue IDs
+- `restaurants/data/*.csv` - CSV files with restaurant data and venue IDs
