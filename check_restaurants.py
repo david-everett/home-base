@@ -102,7 +102,7 @@ Examples:
 
     parser.add_argument(
         '--restaurants-dir',
-        default='/Users/davideverett/Home Base/restaurants',
+        default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'restaurants'),
         help='Directory containing restaurant markdown files'
     )
 
