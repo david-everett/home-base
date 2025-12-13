@@ -1,0 +1,142 @@
+{
+  "places_we_love": {
+    "dinner": [
+      {
+        "name": "Watawa",
+        "location": "Astoria",
+        "cuisine": "Sushi",
+        "venue_id": null,
+        "notes": "Amazing sushi",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.327536"
+      },
+      {
+        "name": "Lilia",
+        "location": "Williamsburg",
+        "cuisine": "Italian",
+        "venue_id": null,
+        "notes": "Best pasta",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.327974"
+      },
+      {
+        "name": "Il Posto Accanto",
+        "location": "EV",
+        "cuisine": "Italian",
+        "venue_id": null,
+        "notes": "Cozy spot",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.328134"
+      }
+    ],
+    "brunch": [],
+    "drinks": [],
+    "lunch": [
+      {
+        "name": "Outside dumpling story",
+        "location": "Grant St",
+        "cuisine": "Skewers",
+        "venue_id": null,
+        "notes": "After 5pm, cash only",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.329486"
+      }
+    ],
+    "dessert": []
+  },
+  "places_to_try": {
+    "dinner": [
+      {
+        "name": "Mono Mono",
+        "location": "Bowery",
+        "cuisine": "Korean",
+        "venue_id": null,
+        "notes": "Heard great things",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.328348"
+      },
+      {
+        "name": "Menkoi Sato",
+        "location": "WV",
+        "cuisine": "Ramen",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.328485"
+      },
+      {
+        "name": "Au Zaatar",
+        "location": "EV",
+        "cuisine": "Middle Eastern",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.328614"
+      },
+      {
+        "name": "Fonda",
+        "location": "Park Slope",
+        "cuisine": "Mexican",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.328815"
+      },
+      {
+        "name": "Don Udon",
+        "location": "Crown Heights",
+        "cuisine": "Japanese",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.329027"
+      }
+    ],
+    "brunch": [
+      {
+        "name": "Yellow Rose",
+        "location": "EV",
+        "cuisine": "Tex-Mex",
+        "venue_id": "53048",
+        "notes": "Donuts on weekends",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.329180"
+      }
+    ],
+    "drinks": [
+      {
+        "name": "Cervezaria Havemeyer",
+        "location": "",
+        "cuisine": "",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.329334"
+      }
+    ],
+    "lunch": [
+      {
+        "name": "Chili",
+        "location": "Murray Hill",
+        "cuisine": "",
+        "venue_id": null,
+        "notes": "",
+        "price_range": "",
+        "rating": "",
+        "added_date": "2025-12-13T10:15:51.329648"
+      }
+    ],
+    "dessert": []
+  }
+}

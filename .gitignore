@@ -1,0 +1,24 @@
+# Credentials - NEVER commit
+.env
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Cloned repos (have their own git history)
+resy-booking-bot/
+resy-cli/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Claude Code plans (temporary)
+.claude/plans/
