@@ -100,9 +100,9 @@ def search_venues(query: str, api_key: str, auth_token: str) -> list:
         return []
 
 
-def add_restaurant(venue_id: int, name: str, location: str, cuisine: str,
-                   list_type: str, category: str, notes: str = '',
-                   restaurants_dir: str = None) -> bool:
+def add_restaurant(name: str, location: str, cuisine: str,
+                   list_type: str, category: str, venue_id: int = None,
+                   notes: str = '', restaurants_dir: str = None) -> bool:
     """Add a restaurant to the appropriate CSV file"""
     if restaurants_dir is None:
         # Default to data/ directory relative to this script
@@ -123,14 +123,18 @@ def add_restaurant(venue_id: int, name: str, location: str, cuisine: str,
     with open(filepath, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if str(row.get('venue_id')) == str(venue_id):
+            # If we have a venue_id, match on that; otherwise match on name
+            if venue_id and str(row.get('venue_id')) == str(venue_id):
                 print(f"Already exists: {name} (ID: {venue_id}) in {filename}")
+                return False
+            elif not venue_id and row.get('name', '').lower() == name.lower():
+                print(f"Already exists: {name} in {filename}")
                 return False
 
     # Append to CSV
     with open(filepath, 'a', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow([name, venue_id, location, cuisine, notes])
+        writer.writerow([name, venue_id or '', location, cuisine, notes])
 
     print(f"Added {name} to {filename}")
     return True
@@ -150,7 +154,8 @@ def main():
 
     # Add command
     add_parser = subparsers.add_parser('add', help='Add restaurant to list')
-    add_parser.add_argument('--venue-id', type=int, required=True)
+    add_parser.add_argument('--venue-id', type=int, default=None,
+                           help='Resy venue ID (optional for non-Resy places)')
     add_parser.add_argument('--name', required=True)
     add_parser.add_argument('--location', required=True)
     add_parser.add_argument('--cuisine', required=True)
@@ -179,12 +184,12 @@ def main():
 
     elif args.command == 'add':
         success = add_restaurant(
-            venue_id=args.venue_id,
             name=args.name,
             location=args.location,
             cuisine=args.cuisine,
             list_type=args.list_type,
             category=args.category,
+            venue_id=args.venue_id,
             notes=args.notes,
             restaurants_dir=args.restaurants_dir
         )

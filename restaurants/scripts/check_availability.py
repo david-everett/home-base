@@ -24,12 +24,23 @@ def parse_restaurant_csv(file_path):
         reader = csv.DictReader(f)
         for row in reader:
             if row.get('venue_id'):  # Only include restaurants with venue IDs
+                # Parse travel time if present
+                travel_time = None
+                if row.get('travel_time_minutes'):
+                    try:
+                        travel_time = int(row['travel_time_minutes'])
+                    except ValueError:
+                        pass
+
                 restaurants.append({
                     'name': row['name'],
                     'venue_id': row['venue_id'],
                     'location': row['location'],
                     'cuisine': row['cuisine'],
-                    'notes': row.get('notes', '')  # Optional field
+                    'notes': row.get('notes', ''),
+                    'travel_time_minutes': travel_time,
+                    'latitude': row.get('latitude'),
+                    'longitude': row.get('longitude')
                 })
 
     return restaurants
@@ -116,6 +127,13 @@ Examples:
         help='Concise output (show time ranges instead of all slots)'
     )
 
+    parser.add_argument(
+        '--max-travel-time',
+        type=int,
+        default=None,
+        help='Filter restaurants by max travel time in minutes (e.g., 30)'
+    )
+
     args = parser.parse_args()
 
     # Load credentials from .env
@@ -152,13 +170,32 @@ Examples:
         print(f"No restaurants with venue IDs found in {file_path}")
         sys.exit(1)
 
+    # Filter by travel time if specified
+    skipped_for_travel_time = []
+    if args.max_travel_time:
+        filtered_restaurants = []
+        for r in restaurants:
+            if r['travel_time_minutes'] is None:
+                # Include restaurants without travel time data
+                filtered_restaurants.append(r)
+            elif r['travel_time_minutes'] <= args.max_travel_time:
+                filtered_restaurants.append(r)
+            else:
+                skipped_for_travel_time.append(r)
+        restaurants = filtered_restaurants
+
     # Print header
     print(f"🍽️  Checking {args.category} availability")
     print(f"📅  Date: {target_date}")
     print(f"👥  Party size: {args.party_size}")
     print(f"🕐  Max time: {args.max_time}")
+    if args.max_travel_time:
+        print(f"🚇  Max travel: {args.max_travel_time} min")
     print(f"📋  List: {list_type}")
-    print(f"🔍  Checking {len(restaurants)} restaurants...")
+    if skipped_for_travel_time:
+        print(f"🔍  Checking {len(restaurants)} restaurants (skipped {len(skipped_for_travel_time)} too far)...")
+    else:
+        print(f"🔍  Checking {len(restaurants)} restaurants...")
     print("=" * 60)
     print()
 
@@ -213,6 +250,8 @@ Examples:
             print(f"📍 {resto['name']}")
             print(f"   Location: {resto['location']}")
             print(f"   Cuisine: {resto['cuisine']}")
+            if resto.get('travel_time_minutes'):
+                print(f"   Travel: {resto['travel_time_minutes']} min")
 
             if args.concise:
                 # Show time range instead of all slots

@@ -1,13 +1,14 @@
-name,venue_id,location,cuisine,notes
-Mono Mono,59569,Bowery,Korean,
-Au Zaatar,3708,EV,Middle Eastern,
-Rolos,36902,Ridgewood,American,
-Sweet Afton,36742,Astoria,American,
-Mam,80206,Lower East Side,Vietnamese,
-Theodora,73589,Fort Greene,Mediterranean,
-5ive Spice,69009,Grammercy,Vietnamese,
-Dhamaka,48994,Lower East Side,Indian,
-Ladybird,618,East Village,Vegan,
-Ayat,78974,Ditmas Park,Middle Eastern,
-Yellow Rose,53048,East Village,Tex-Mex,
-Hangawi,1440,Murray Hill,Vegan & Plant-based,
+name,venue_id,location,cuisine,notes,latitude,longitude,travel_time_minutes
+Mono Mono,59569,Bowery,Korean,,40.7254016,-73.9881049,20
+Au Zaatar,3708,EV,Middle Eastern,,40.7289046,-73.98117239999999,28
+Rolos,36902,Ridgewood,American,,40.7019431,-73.903537,47
+Sweet Afton,36742,Astoria,American,,40.76544090000001,-73.91912099999999,61
+Mam,80206,Lower East Side,Vietnamese,,40.7170509,-73.9932757,21
+Theodora,73589,Fort Greene,Mediterranean,,40.6860572,-73.9731084,18
+5ive Spice,69009,Grammercy,Vietnamese,,40.7408306,-73.9812869,32
+Dhamaka,48994,Lower East Side,Indian,,40.7182426,-73.9879902,14
+Ladybird,618,East Village,Vegan,,40.7266801,-73.9845333,28
+Ayat,78974,Ditmas Park,Middle Eastern,,40.6416139,-73.9630182,37
+Yellow Rose,53048,East Village,Tex-Mex,,40.7325214,-73.9879752,28
+Hangawi,1440,Murray Hill,Vegan & Plant-based,,40.7466013,-73.98476169999999,30
+Inday,,Williamsburg,Indian,,40.714779,-73.9590624,37

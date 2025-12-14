@@ -46,7 +46,7 @@ This returns JSON with matching venues:
 
 ### Step 3: Handle Results
 
-**If no results:** Tell the user no matches were found on Resy.
+**If no results:** Offer to add anyway (see Step 3a below).
 
 **If multiple results:** Use AskUserQuestion with options for each match:
 ```
@@ -62,6 +62,55 @@ questions: [{
 ```
 
 **If one result (or after selection):** Proceed to Step 4.
+
+### Step 3a: Fallback for Non-Resy Restaurants
+
+When Resy search returns no results:
+
+1. **Ask if they want to add anyway:**
+```
+questions: [{
+  question: "[Restaurant] isn't on Resy. Add it anyway?",
+  header: "Not on Resy",
+  options: [
+    { label: "Yes, add it", description: "I'll look up the details for you" },
+    { label: "No, skip it", description: "Cancel adding this restaurant" }
+  ],
+  multiSelect: false
+}]
+```
+
+2. **If yes, use WebSearch** to find restaurant info:
+```
+WebSearch: "[restaurant name] NYC restaurant"
+```
+
+3. **Present findings for verification** (combine with list/category selection):
+```
+questions: [
+  {
+    question: "Found info for [Restaurant]. Confirm details?",
+    header: "Location",
+    options: [
+      { label: "[Found Location]", description: "From web search" },
+      { label: "Other", description: "Enter manually" }
+    ],
+    multiSelect: false
+  },
+  {
+    question: "Cuisine type?",
+    header: "Cuisine",
+    options: [
+      { label: "[Found Cuisine]", description: "From web search" },
+      { label: "Other", description: "Enter manually" }
+    ],
+    multiSelect: false
+  },
+  // Include list and category questions as in Step 4
+]
+```
+
+4. **Add without venue_id** - proceed to Step 5 with no `--venue-id` flag.
 
 ### Step 4: Gather Missing Info & Confirm (Single UI)
 
@@ -96,7 +145,7 @@ If list and category were already specified in the original request, skip direct
 
 ### Step 5: Add to List
 
-On confirmation, run:
+**For Resy restaurants** (with venue_id):
 ```bash
 python3 restaurants/scripts/add_restaurant.py add \
   --venue-id 53048 \
@@ -105,6 +154,16 @@ python3 restaurants/scripts/add_restaurant.py add \
   --cuisine "Tex-Mex" \
   --list try \
   --category dinner
+```
+
+**For non-Resy restaurants** (no venue_id):
+```bash
+python3 restaurants/scripts/add_restaurant.py add \
+  --name "Inday" \
+  --location "Flatiron" \
+  --cuisine "Indian" \
+  --list try \
+  --category lunch
 ```
 
 Report success or failure to the user.
@@ -131,6 +190,6 @@ Report success or failure to the user.
 
 ## Error Handling
 
-- **No Resy results:** "Couldn't find [name] on Resy. Check the spelling or try a different name."
-- **Already in list:** The script detects duplicates by venue ID and reports it.
+- **No Resy results:** Offer fallback flow (Step 3a) to add manually with web search.
+- **Already in list:** The script detects duplicates by venue ID (for Resy) or by name (for non-Resy).
 - **Invalid list/category combo:** If a file doesn't exist (e.g., places_we_love_brunch.csv), inform the user.
