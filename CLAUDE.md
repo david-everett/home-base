@@ -10,14 +10,15 @@ Build reusable automation patterns that:
 - Delegate complex logic to scripts that skills can invoke
 - Grow incrementally - each new automation follows the same pattern
 
-## Planned Automation Domains
+## Automation Domains
 
 | Domain | Status | Description |
 |--------|--------|-------------|
 | Restaurants | Active | Check availability on Resy, manage curated lists |
+| Finance | Active | Expense tracking, budget monitoring |
+| Fitness | Active | Workout logging, progress tracking |
 | Calendar/Scheduling | Planned | Meeting scheduling, event reminders |
 | Tasks/Productivity | Planned | Todo lists, project tracking |
-| Finance/Budgeting | Planned | Expense tracking, budget alerts |
 
 ## Architecture
 

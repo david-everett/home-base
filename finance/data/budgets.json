@@ -1,0 +1,32 @@
+{
+  "monthly_budgets": {
+    "food": {
+      "limit": 400,
+      "includes": ["groceries", "lunch", "snacks"]
+    },
+    "dining": {
+      "limit": 500,
+      "includes": ["restaurants", "bars", "delivery"]
+    },
+    "transport": {
+      "limit": 200,
+      "includes": ["uber", "lyft", "subway", "gas"]
+    },
+    "subscriptions": {
+      "limit": 100,
+      "includes": ["streaming", "software", "memberships"]
+    },
+    "shopping": {
+      "limit": 300,
+      "includes": ["amazon", "clothing", "electronics"]
+    },
+    "coffee": {
+      "limit": 50,
+      "includes": ["coffee shops", "beans"]
+    }
+  },
+  "preferences": {
+    "alert_threshold": 0.8,
+    "week_starts": "monday"
+  }
+}
